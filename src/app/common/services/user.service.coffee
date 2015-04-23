@@ -3,7 +3,7 @@ angular.module('kyuMaruGram')
     'localStorageService'
     (localStorageService) ->
       accessToken = null
-      userData = {}
+      userData = null
 
       getAccessToken: () ->
         return accessToken or localStorageService.get('kyumaru-gram-accessToken')
@@ -14,4 +14,7 @@ angular.module('kyuMaruGram')
 
       set: (data) ->
         userData = data
+
+      get: () ->
+        userData
   ])
