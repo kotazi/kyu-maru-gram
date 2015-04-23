@@ -8,5 +8,4 @@ angular.module('kyuMaruGram')
 
       get: () ->
         items
-
   ])

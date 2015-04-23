@@ -1,21 +1,17 @@
 angular.module('kyuMaruGram')
   .factory('User', [
-    () ->
+    'localStorageService'
+    (localStorageService) ->
       accessToken = null
-      id = null
       userData = {}
 
-      getAcceccToken: () ->
-        # Tmp
-        accessToken = '13712342.4183bc0.bca532b1eb264603b217822be720ed5e'
-        return accessToken
+      getAccessToken: () ->
+        return accessToken or localStorageService.get('kyumaru-gram-accessToken')
 
-      getId: () ->
-        # Tmp
-        id = '13712342'
-        return id
+      setAccessToken: (value) ->
+        accessToken = value
+        localStorageService.set('kyumaru-gram-accessToken', value)
 
       set: (data) ->
         userData = data
   ])
-  

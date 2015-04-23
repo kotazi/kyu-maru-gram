@@ -3,7 +3,7 @@ angular.module('kyuMaruGram')
     '$resource'
     'Insta'
     'User'
-    ($resource, Insta, User)->    
+    ($resource, Insta, User)->
       getPopularItems: () ->
         resource = $resource('https://api.instagram.com/v1/media/popular',
           {
@@ -13,7 +13,7 @@ angular.module('kyuMaruGram')
             query:
               method: 'JSONP'
               params:
-                access_token: User.getAcceccToken()
+                access_token: User.getAccessToken()
           }
         )
         resource.query().$promise
@@ -33,17 +33,16 @@ angular.module('kyuMaruGram')
         )
         resource.query().$promise
 
-      getUserData: () ->
-        resource = $resource('https://api.instagram.com/v1/users/:id/',
+      getSelfData: () ->
+        resource = $resource('https://api.instagram.com/v1/users/self/',
           {
-            id: User.getId()
             callback: "JSON_CALLBACK"
           },
           {
             query:
               method: 'JSONP'
               params:
-                access_token: User.getAcceccToken()
+                access_token: User.getAccessToken()
           }
         )
         resource.query().$promise
