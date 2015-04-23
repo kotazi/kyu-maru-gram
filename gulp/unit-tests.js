@@ -11,10 +11,23 @@ var _ = require('lodash');
 
 module.exports = function(options) {
   function listFiles(callback) {
-    var wiredepOptions = _.extend({}, options.wiredep, {
+
+    /*
+      Angular-gulp-generatorの不具合に暫定対応。
+      これで`gulp test:auto`が正しく動くようになる。
+      しかもCoffeeでかける。
+      もともとは`option.wiredep`
+    */
+    var kzWiredep = {
+      directory: 'bower_components',
+      exclude: [ /bootstrap-sass-official\/.*\.js/, /bootstrap\.css/ ]
+    }
+
+    var wiredepOptions = _.extend({}, kzWiredep, {
       dependencies: true,
       devDependencies: true
     });
+
     var bowerDeps = wiredep(wiredepOptions);
 
     var specFiles = [
