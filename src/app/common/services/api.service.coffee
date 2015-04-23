@@ -31,7 +31,7 @@ angular.module('kyuMaruGram')
                 client_id: Insta.clientId
           }
         )
-        resource.query().$promise
+        resource.query()
 
       getSelfData: () ->
         resource = $resource('https://api.instagram.com/v1/users/self/',
@@ -45,5 +45,5 @@ angular.module('kyuMaruGram')
                 access_token: User.getAccessToken()
           }
         )
-        resource.query().$promise
+        resource.query()
   ])
