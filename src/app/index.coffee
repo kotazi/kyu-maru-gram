@@ -7,6 +7,7 @@ angular.module('kyuMaruGram', [
   'ui.router'
   'ui.bootstrap'
   'LocalStorageModule'
+  'infinite-scroll'
   ])
   .config([
     '$stateProvider'
