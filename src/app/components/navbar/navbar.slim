@@ -1,0 +1,19 @@
+nav.navbar.navbar-static-top.navbar-default ng-controller="NavbarCtrl" 
+  .container
+    .navbar-header
+      a.navbar-brand href="https://www.facebook.com/90kyumaru" 
+        span.glyphicon.glyphicon-camera
+        | KyumaruGram
+    #bs-example-navbar-collapse-6.collapse.navbar-collapse
+      ul.nav.navbar-nav
+        li.active
+          a ui-sref="home"  Home
+        li
+          a ui-sref="about"  About
+        li
+          a ui-sref="contact"  Contact
+      ul.nav.navbar-nav.navbar-right
+        .user_info
+          span.user_thumb
+            img ng-src==("{{ user.profile_picture }}")
+          span.user_name {{user.username}}

@@ -7,8 +7,12 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
+    <script src="./../bower_components/isotope/dist/isotope.pkgd.js"></script>
+    <script src="./../bower_components/imagesloaded/imagesloaded.pkgd.js"></script>
+
     <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
     <link rel="stylesheet" href="app/vendor.css">
+    <link rel="stylesheet" href="./../bower_components/Bootflat/bootflat/css/bootflat.css">
     <!-- bower:css -->
     <!-- run `gulp inject` to automatically populate bower styles dependencies -->
     <!-- endbower -->
@@ -25,7 +29,9 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div ui-view></div>
+    <div class="wrapper">
+      <div ui-view></div>
+    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>
@@ -36,7 +42,10 @@
       r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
       ga('create','UA-XXXXX-X');ga('send','pageview');
     </script>
-
+      <!-- Bootflat's JS files.-->
+      <script src="./../bower_components/Bootflat/bootflat/js/icheck.min.js"></script>
+      <script src="./../bower_components/Bootflat/bootflat/js/jquery.fs.selecter.min.js"></script>
+      <script src="./../bower_components/Bootflat/bootflat/js/jquery.fs.stepper.min.js"></script>
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
     <!-- run `gulp inject` to automatically populate bower script dependencies -->

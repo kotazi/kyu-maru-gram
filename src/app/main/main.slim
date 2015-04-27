@@ -1,0 +1,17 @@
+div
+  div ng-include="'app/components/navbar/navbar.html'" 
+
+  div.text-center.main-content
+    p.lead
+      img alt=("I'm Yeoman") src="assets/images/90.jpg" /
+      br/
+    h2 kyumaruGram
+
+
+  div infinite-scroll="loadMore()" infinite-scroll-distance="0" infinite-scroll-immediate-check="false"
+    isotope.item_box
+      .item ng-repeat=("brick in bricks")
+        img ng-click="open(brick)" ng-src==("{{ brick.images.low_resolution.url }}") alt="A isotope brick"
+      
+  hr/
+  .footer

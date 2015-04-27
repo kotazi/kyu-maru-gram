@@ -34,8 +34,12 @@ module.exports = function(options) {
       }
     });
 
-    gulp.watch(options.src + '/app/**/*.html', function(event) {
-      browserSync.reload(event.path);
+    gulp.watch(options.src + '/app/**/*.slim', function(event) {
+      if(isOnlyChange(event)) {
+        gulp.start('slim');
+      } else {
+        gulp.start('inject');
+      }
     });
   });
 };

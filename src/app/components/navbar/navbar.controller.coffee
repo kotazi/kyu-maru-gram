@@ -1,3 +1,4 @@
-angular.module "kyuMaruGram"
-  .controller "NavbarCtrl", ($scope) ->
+angular.module('kyuMaruGram')
+  .controller('NavbarCtrl', ($scope) ->
     $scope.date = new Date()
+  )

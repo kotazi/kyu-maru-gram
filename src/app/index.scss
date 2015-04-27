@@ -1,3 +1,12 @@
+
+hr {
+  margin: 10px 0;
+}
+
+.wrapper{
+  color: #fff;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -12,6 +21,71 @@
     width: 50px;
   }
 }
+
+.main-content {
+  margin: 150px 0;
+  img {
+    max-width: 100%;
+  }
+  h2 {
+    color: #000;
+    margin: 0;
+    color: #000;
+    margin: 0;
+    position: relative;
+    top: -70px;
+  }
+}
+
+.item_box {
+  margin: 0 auto;
+  background: #DDD;
+  width: 100%;
+  display: block;
+  .item {
+    float: left;
+    width: 306px;
+    height: 306px;
+  }
+}
+
+.user_info {
+  .user_thumb
+    img {
+      width: 40px;
+      margin: 5px 0 0 0;
+    }
+  .user_name {
+    position: relative;
+    top: 18px;
+    left: 5px;
+    font-size: 16px;
+  }
+
+  .btn-follow {
+    position: relative;
+    right: 20px;
+  }
+}
+
+.item_modal {
+  padding: 10px;
+  .user_info {
+    padding: 10px 0 0 20px;
+    .user_name {
+
+    }
+  }
+
+  .item_info {
+    .item_img {
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+
 
 /* Do not remove this comments bellow. It's the markers used by gulp-inject to inject
    all your sass files automatically */

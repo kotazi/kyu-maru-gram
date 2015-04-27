@@ -1,66 +1,86 @@
-angular.module "kyuMaruGram"
-  .controller "MainCtrl", ($scope) ->
-    $scope.awesomeThings = [
-      {
-        'title': 'AngularJS',
-        'url': 'https://angularjs.org/',
-        'description': 'HTML enhanced for web apps!',
-        'logo': 'angular.png'
-      },
-      {
-        'title': 'BrowserSync',
-        'url': 'http://browsersync.io/',
-        'description': 'Time-saving synchronised browser testing.',
-        'logo': 'browsersync.png'
-      },
-      {
-        'title': 'GulpJS',
-        'url': 'http://gulpjs.com/',
-        'description': 'The streaming build system.',
-        'logo': 'gulp.png'
-      },
-      {
-        'title': 'Jasmine',
-        'url': 'http://jasmine.github.io/',
-        'description': 'Behavior-Driven JavaScript.',
-        'logo': 'jasmine.png'
-      },
-      {
-        'title': 'Karma',
-        'url': 'http://karma-runner.github.io/',
-        'description': 'Spectacular Test Runner for JavaScript.',
-        'logo': 'karma.png'
-      },
-      {
-        'title': 'Protractor',
-        'url': 'https://github.com/angular/protractor',
-        'description': 'End to end test framework for AngularJS applications built on top of WebDriverJS.',
-        'logo': 'protractor.png'
-      },
-      {
-        'title': 'Bootstrap',
-        'url': 'http://getbootstrap.com/',
-        'description': 'Bootstrap is the most popular HTML, CSS, and JS framework for developing responsive, mobile first projects on the web.',
-        'logo': 'bootstrap.png'
-      },
-      {
-        'title': 'Angular UI Bootstrap',
-        'url': 'http://angular-ui.github.io/bootstrap/',
-        'description': 'Bootstrap components written in pure AngularJS by the AngularUI Team.',
-        'logo': 'ui-bootstrap.png'
-      },
-      {
-        'title': 'Sass (Node)',
-        'url': 'https://github.com/sass/node-sass',
-        'description': 'Node.js binding to libsass, the C version of the popular stylesheet preprocessor, Sass.',
-        'logo': 'node-sass.png'
-      },
-      {
-        'title': 'CoffeeScript',
-        'url': 'http://coffeescript.org/',
-        'description': 'CoffeeScript, \'a little language that compiles into JavaScript\'.',
-        'logo': 'coffeescript.png'
-      }
-    ]
-    angular.forEach $scope.awesomeThings, (awesomeThing) ->
-      awesomeThing.rank = Math.random()
+
+angular.module('kyuMaruGram')
+  .controller('MainCtrl', [
+    '$scope'
+    'api'
+    'Items'
+    'User'
+    '$location'
+    'Insta'
+    '$modal'
+    '$timeout'
+    ($scope, api, Items, User, $location, Insta, $modal, $timeout) ->
+
+      container = null
+      iso = null
+
+      $scope.hasAccessTokenInUrl = () ->
+        return $location.path().match(/\/access_token=/)
+
+      $scope.init = ->
+
+        if $scope.hasAccessTokenInUrl()
+          accessToken = $location.path().split(/\/access_token=/)[1]
+          User.setAccessToken(accessToken)
+          
+        if !User.getAccessToken()
+          # 単体テスト対策
+          if $location.absUrl() == 'http://server/'
+            # 何もしない
+          else if $location.absUrl() == 'http://localhost:3000/index.html?proctor=true#/'
+            # 何もしない
+          else
+            location.href = "https://instagram.com/oauth/authorize/?client_id=#{Insta.clientId}&scope=basic+comments+relationships+likes&redirect_uri=#{Insta.redirectUrl}&response_type=token"
+            return
+
+        api.getSelfData().$promise.then((res) ->
+          User.set(res.data)
+          $scope.user = res.data
+        )
+
+        api.getKyumaruItems().$promise.then((res) ->
+
+          Items.set(res.data)
+          Items.setNextUrl(res.pagination)
+          $scope.bricks = Items.get()
+          $timeout ->
+            container = $('.item_box')[0]
+            options =
+              itemSelector: '.item'
+              columnWidth: 0
+              isFitWidth: true
+            iso = new Masonry(container,options)
+
+        )
+
+      $scope.open = (item) ->
+        innerScope = $scope.$new(true)
+        innerScope.item = item
+        $modal.open(
+          templateUrl: './app/modal/modalItem.html'
+          controller: 'ModalCtrl'
+          scope: innerScope
+        )
+
+      $scope.loadMore = () ->
+        url = Items.getNextUrl()
+        if !url
+          return false
+        if !Items.isFinishedLoading()
+          return false
+        if Items.loading
+          return false
+
+        Items.loading = true
+        api.getKyumaruNexstItems(url).$promise.then((res) ->
+          Items.loading = false
+          Items.add(res.data)
+          Items.setNextUrl(res.pagination)
+          $scope.bricks = Items.get()
+          iso.reloadItems()
+          iso.layout()
+        )
+
+      $scope.init()
+
+  ])
