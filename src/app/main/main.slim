@@ -1,20 +1,17 @@
-.container
+div
   div ng-include="'app/components/navbar/navbar.html'" 
-  .jumbotron.text-center
-    h1 'Allo, 'Allo!
-    p.lead
-      img alt=("I'm Yeoman") src="assets/images/yeoman.png" /
-      br/
-      | Always a pleasure scaffolding your apps.
-    p
-      a.btn.btn-lg.btn-success ng-href="#"  Splendid!
 
-  isotope.item_box
-    .item ng-repeat=("brick in bricks")
-      img ng-src==("{{ brick.src }}") alt="A isotope brick"
+  div.text-center.main-content
+    p.lead
+      img alt=("I'm Yeoman") src="assets/images/90.jpg" /
+      br/
+    h2 kyumaruGram
+
+
+  div infinite-scroll="loadMore()" infinite-scroll-distance="0" infinite-scroll-immediate-check="false"
+    isotope.item_box
+      .item ng-repeat=("brick in bricks")
+        img ng-click="open(brick)" ng-src==("{{ brick.images.low_resolution.url }}") alt="A isotope brick"
       
   hr/
   .footer
-    p
-      | With ♥ from
-      a href="https://twitter.com/Swiip"  @Swiip

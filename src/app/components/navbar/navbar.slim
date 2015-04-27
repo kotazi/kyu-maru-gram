@@ -1,9 +1,9 @@
-nav.navbar.navbar-static-top.navbar-inverse ng-controller="NavbarCtrl" 
-  .container-fluid
+nav.navbar.navbar-static-top.navbar-default ng-controller="NavbarCtrl" 
+  .container
     .navbar-header
-      a.navbar-brand href="https://github.com/Swiip/generator-gulp-angular" 
-        span.glyphicon.glyphicon-home
-        | Gulp Angular
+      a.navbar-brand href="https://www.facebook.com/90kyumaru" 
+        span.glyphicon.glyphicon-camera
+        | KyumaruGram
     #bs-example-navbar-collapse-6.collapse.navbar-collapse
       ul.nav.navbar-nav
         li.active
@@ -13,4 +13,7 @@ nav.navbar.navbar-static-top.navbar-inverse ng-controller="NavbarCtrl"
         li
           a ui-sref="contact"  Contact
       ul.nav.navbar-nav.navbar-right
-        li Current date:  { date | date:'yyyy-MM-dd' } 
+        .user_info
+          span.user_thumb
+            img ng-src==("{{ user.profile_picture }}")
+          span.user_name {{user.username}}
