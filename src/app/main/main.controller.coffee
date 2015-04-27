@@ -10,12 +10,20 @@ angular.module('kyuMaruGram')
     '$modal'
     '$timeout'
     ($scope, api, Items, User, $location, Insta, $modal, $timeout) ->
-
       container = null
       iso = null
 
       $scope.hasAccessTokenInUrl = () ->
         return $location.path().match(/\/access_token=/)
+
+      $scope.isSafari = ->
+        ua = window.navigator.userAgent.toLowerCase()
+
+        if ua.indexOf('chrome') != -1
+          return false
+        else if ua.indexOf('safari') != -1
+          return true
+        return false
 
       $scope.init = ->
 
@@ -28,6 +36,9 @@ angular.module('kyuMaruGram')
           if $location.absUrl() == 'http://server/'
             # 何もしない
           else if $location.absUrl() == 'http://localhost:3000/index.html?proctor=true#/'
+            # 何もしない
+
+          else if $scope.isSafari()
             # 何もしない
           else
             location.href = "https://instagram.com/oauth/authorize/?client_id=#{Insta.clientId}&scope=basic+comments+relationships+likes&redirect_uri=#{Insta.redirectUrl}&response_type=token"
