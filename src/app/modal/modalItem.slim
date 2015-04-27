@@ -1,0 +1,23 @@
+
+.item_modal
+  button.btn.btn-default.pull-right type="button" ng-click="close()" ☓
+  .user_info
+    .user_thumb
+      img ng-src==("{{ item.user.profile_picture }}")
+      span.user_name {{item.user.username}}
+    .row
+      button.btn.btn-success.pull-right.btn-follow.disabled type="button" フォローする
+  hr
+  .item_info
+    .item_img
+      a href="{{item.link}}" target="blank"
+        img ng-src==("{{ item.images.standard_resolution.url }}")
+    span.item_likes.glyphicon.glyphicon-heart {{item.likes.count}}
+    span.item_comments.glyphicon.glyphicon-comment {{item.comments.count}}
+    hr
+    pre
+      .item_caption {{item.caption.text}}
+    textarea.form-control ng-model="text" row="3" コメントする
+    .modal-footer
+      button.btn.btn-default type="button" ng-click="close()" 閉じる
+      button.btn.btn-success.disabled type="button" ng-click="comment(text)" コメントする
