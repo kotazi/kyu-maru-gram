@@ -2,7 +2,7 @@
 
 describe 'controllers', ->
   scope = undefined
-  beforeEach module('kyuMaruGram')
+  beforeEach module('ohshimagram')
   beforeEach inject(($rootScope, $location) ->
     scope = $rootScope.$new()
     return

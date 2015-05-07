@@ -2270,7 +2270,7 @@ describe 'user.service', ->
     }
   ]
 
-  beforeEach module('kyuMaruGram')
+  beforeEach module('ohshimagram')
 
   it 'should return null, when initialize.', inject((Items) ->
     expect(Items.get()).toBeNull()

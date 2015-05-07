@@ -1,5 +1,5 @@
 
-angular.module('kyuMaruGram')
+angular.module('ohshimagram')
   .controller('MainCtrl', [
     '$scope'
     'api'
@@ -55,6 +55,7 @@ angular.module('kyuMaruGram')
           Items.setNextUrl(res.pagination)
           $scope.bricks = Items.get()
           $timeout ->
+
             container = $('.item_box')[0]
             options =
               itemSelector: '.item'

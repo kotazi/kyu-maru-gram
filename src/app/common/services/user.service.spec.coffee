@@ -17,7 +17,7 @@ describe 'user.service', ->
     "id": "13712342"
   }
 
-  beforeEach module('kyuMaruGram')
+  beforeEach module('ohshimagram')
 
   it 'should return null, when initialize.', inject((User) ->
     expect(User.get()).toBeNull()

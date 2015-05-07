@@ -1,4 +1,4 @@
-angular.module('kyuMaruGram', [
+angular.module('ohshimagram', [
   'ngAnimate'
   'ngCookies'
   'ngTouch'
