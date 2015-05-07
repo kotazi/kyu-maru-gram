@@ -1,4 +1,4 @@
-angular.module('kyuMaruGram')
+angular.module('ohshimagram')
   .factory('api', [
     '$resource'
     'Insta'
@@ -21,7 +21,7 @@ angular.module('kyuMaruGram')
       getKyumaruItems: () ->
         resource = $resource('https://api.instagram.com/v1/tags/:tagId/media/recent',
           {
-            tagId: 'きゅーまる'
+            tagId: '伊豆大島'
             callback: "JSON_CALLBACK"
           },
           {

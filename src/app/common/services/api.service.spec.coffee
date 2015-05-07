@@ -3,7 +3,7 @@
 describe 'api.service', ->
   httpBackend = undefined
 
-  beforeEach module('kyuMaruGram')
+  beforeEach module('ohshimagram')
   beforeEach inject(($httpBackend) ->
     httpBackend = $httpBackend
 
